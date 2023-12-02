@@ -1,0 +1,38 @@
+import re
+
+def replace(line):
+    mapping = {
+        'nine': 'n9e',
+        'eight': 'e8t',
+        'seven': 's7n',
+        'six': 's6x',
+        'five': 'f5e',
+        'four': 'f4r',
+        'three': 't3e',
+        'two': 't2o',
+        'one': 'o1e'
+    }
+    for word in mapping:
+        line = re.sub(re.escape(word), mapping[word], line, flags=re.IGNORECASE)
+    return line
+
+def main():
+    f = open('day1\\input.txt', 'r')
+    lines = f.readlines()
+    count = 0
+    for preline in lines:
+        line = replace(preline)
+        first = None
+        last = None
+        for letternum in range(0, len(line)):
+            letter = line[letternum]
+            if str(letter).isdigit():
+                last = letter
+                if first is None:
+                    first = letter
+        together = first + last
+        count = count + int(together)
+    print(count)
+
+if __name__ == "__main__":
+    main()
