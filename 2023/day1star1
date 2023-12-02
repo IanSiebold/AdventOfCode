@@ -1,0 +1,15 @@
+f = open('input.txt', 'r')
+lines = f.readlines()
+count = 0
+for line in lines:
+    first = -1
+    last = -1
+    for letternum in range(0, len(line)):
+        letter = line[letternum]
+        if str(letter).isdigit():
+            last = letter
+            if first == -1:
+                first = letter
+    together = first + last
+    count = count + int(together)
+print(count)
